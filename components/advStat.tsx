@@ -1,7 +1,7 @@
 import Image from 'next/image'  
 export default function AdvStat(){
     return(
-        <div className="mt-[200px] w-[100%] items-center relative justify-center flex flex-col ">
+        <div className="mt-[100px] w-[100%] items-center relative justify-center gap-0 flex flex-col ">
             <div  className="flex w-[100%] flex-col items-center justify-center gap-[20px] sm:mb-[90px] ">
                 <h2 className="text-[28px] font-[800] text-center text-[#232127] "> Advanced Statistics</h2>
                 <p className='text-[18px] font-[700] text-[#bfbfbf] w-[40%] text-center  sm:w-[90%] '>Track how your links are performing across the web with our advanced statistics dashboard.</p>
