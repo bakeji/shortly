@@ -8,7 +8,6 @@ export default function Shorten(){
     const [isEMpty, setIsEmpty] = useState(false)
     const [shortUrl, setShortUrl] = useState('')
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState("")
     const [shortenedLinks, setShortenedLinks] = useState<{ link: string; shortLink: string }[]>([])
    
 
@@ -32,32 +31,44 @@ export default function Shorten(){
             const response = await fetch('api/v1/shorten', options)
             const data = await response.json()
             setShortUrl(data.result_url)
-            setError(data.error)
+
             setShortenedLinks(prev=>[
                 ...prev,
                 {link: link, shortLink: data.result_url}
             ])
+            
             console.log(shortUrl)
-        }
-        catch(error:any){
-            console.log(error.message)
+        
+    }
+        catch(error){
+            console.log(error)
 
         }
         finally{
             setLoading(false)
         }
     }
+    // check for valid url
+    function isValidUrl(url:string) {
+        try {
+          new URL(url);
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
 
     // shorten link button
         function shotenLinkBtn(){
-            if(link !== ''){
+            if(link !== '' && isValidUrl(link)){
                 setLoading(true)
                 setIsEmpty(false)
                 fetchApi()  
               } else{
                 setIsEmpty(true)
               }
-            console.log(link)
+            console.log(isEMpty)
+
         }
 
 
@@ -68,25 +79,24 @@ export default function Shorten(){
                 <div className="flex gap-[20px] items-center justify-center sm:flex-col sm:gap-[5px] "> 
                     <div className="w-[70%] sm:w-[100%]"> 
 
-                    <input className="w-[100%] h-[70px] rounded-[12px] outline-[0] p-[20px] box-border sm:h-[30px] sm:rounded-[6px]"   
-                    type= "url"
-                     placeholder="Shorten a link here..." 
-                    onChange={handleChange}
-                    value={link}
-                    id="link"
-                    />
-                    {error && <p className="text-[#f46262] text-[18px] font-[400] my-0 mx-[auto] italic sm:text-[12px] ">{error}</p>  }
+                        <input className={`w-[100%] h-[70px] rounded-[12px] ${isEMpty?"border-[1px], border-[#f46262], border-solid": ""} outline-[0] p-[20px] box-border sm:h-[30px] sm:rounded-[6px]`}   
+                        type= "url"
+                        placeholder="Shorten a link here..." 
+                        onChange={handleChange}
+                        value={link}
+                        id="link"
+                        />
 
-                       {isEMpty && <p className="text-[#f46262] text-[18px] font-[400] my-0 mx-[auto] italic sm:text-[12px] ">please add a link here</p>  }
+                    {isEMpty && <p className="text-[#f46262] text-[18px] font-[400] my-0 mx-[auto] italic sm:text-[12px] ">please add a link here</p>  }
                     </div>
-                    <button onClick={shotenLinkBtn} className={`w-[16%] ${isEMpty? "mb-6": ""}flex items-center justify-center h-[60px] bg-[#2acfcf] rounded-[10px] text-[white] text-[18px] font-[700] sm:w-[100%] sm:mb-0 sm:mt-2 sm:h-[40px] sm:rounded-[6px]`}>
+                    <button onClick={shotenLinkBtn} className={`w-[16%] ${isEMpty? "mb-6": ""} flex items-center justify-center h-[60px] bg-[#2acfcf] rounded-[10px] text-[white] text-[18px] font-[700] sm:w-[100%] sm:mb-0 sm:mt-2 sm:h-[40px] sm:rounded-[6px]`}>
                         {loading? <Loading /> : "Shorten it!"}
                     </button>
                 </div> 
 
             </div>
 </div>
-            <Links link={link}  shortenedLinks={shortenedLinks}
+            <Links link={shortUrl}  shortenedLinks={shortenedLinks}
              />
         </div>
     )
