@@ -4,7 +4,7 @@ This project is a URL shortening web application built as a solution to the [Fro
 
 ## Live link
 
-Here is a link to the project [shortly](https://vercel.com).
+Here is a link to the project [shortly](https://sho-rtly.netlify.app/).
 
 
 ## Features
