@@ -2,6 +2,11 @@
 
 This project is a URL shortening web application built as a solution to the [Frontend Mentor URL shortening API challenge](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G).
 
+## Live link
+
+Here is a link to the project [shortly](https://vercel.com).
+
+
 ## Features
 
 - Shorten any valid URL
