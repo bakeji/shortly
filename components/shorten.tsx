@@ -67,8 +67,7 @@ export default function Shorten(){
               } else{
                 setIsEmpty(true)
               }
-            console.log(isEMpty)
-
+            
         }
 
 

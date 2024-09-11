@@ -10,7 +10,7 @@ import { PageContext } from "@/context/pageContext";
 import { useState } from "react";
 
 export default function Home(){
-  const [showMobileNav, setShowMobileNav] = useState(false)
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(false)
 
   // show mobile nav button
   const showMobileNavButton = () => {

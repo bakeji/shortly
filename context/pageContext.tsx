@@ -1,4 +1,12 @@
 "use client"
 import { createContext } from "react";
 
-export const PageContext:React.Context<any> = createContext({})
+export type PageContextType = {
+    showMobileNavButton : ()=>void,
+    showMobileNav: boolean
+}
+
+export const PageContext = createContext<PageContextType>({
+    showMobileNavButton: ()=>{},
+    showMobileNav: false,
+})
